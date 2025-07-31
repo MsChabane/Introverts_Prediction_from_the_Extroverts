@@ -11,8 +11,8 @@ os.makedirs(RAW_DATA_PATH,exist_ok=True)
 logger.info('READING THE DATASET')
 df = pd.read_csv(os.path.join(RAW_DATA_PATH,DATA_FILENAME))
 logger.info('SPLIT THE FEATURES AND THE TARGET.')
-X = df.drop(columns=['id','Personality'])
-Y = df.Personality
+X = df.drop(columns=['id',TARGET])
+Y = df[TARGET]
 
 logger.info('ENCODE THE FEATURES AND THE TARGET.')
 X = pd.get_dummies(X)
@@ -22,8 +22,9 @@ Y=encoder.fit_transform(Y)
 logger.info('SAVE THE ENCODER.')
 joblib.dump(encoder,os.path.join(MODELS_PATH,'encoder.pkl'))
 logger.info('SAVE THE FEATURES AND THE TARGET.')
-X.to_csv(os.path.join(PRE_PROCESSED_PATH,'features.csv'),index=False)
-pd.Series(Y).to_csv(os.path.join(PRE_PROCESSED_PATH,'target.csv'),index=False)
+X[TARGET]=Y
+X.to_csv(os.path.join(PRE_PROCESSED_PATH,'data_pre_processed.csv'),index=False)
+
 
 
 

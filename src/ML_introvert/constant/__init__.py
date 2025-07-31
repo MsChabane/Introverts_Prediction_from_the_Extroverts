@@ -10,6 +10,7 @@ MODELS_PATH =Path('models')
 REPORTS_PATH =Path('reprots')
 PARAMS_PATH = Path('params.yml')
 
+TARGET ='Personality'
 
 
 
